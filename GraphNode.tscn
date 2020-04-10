@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://GraphNode.gd" type="Script" id=1]
+
+[node name="GraphNode" type="GraphNode"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -164.5
+margin_top = -163.0
+margin_right = -19.5
+margin_bottom = -105.0
+mouse_filter = 1
+show_close = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="node" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 129.0
+margin_bottom = 38.0
+[connection signal="close_request" from="." to="." method="_on_close_request"]
