@@ -24,6 +24,11 @@ config/name="bayes_net"
 run/main_scene="res://Control.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=1804
+window/size/height=1120
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

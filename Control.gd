@@ -1,7 +1,8 @@
 extends Control
 
 onready var controller_          := get_node("/root/controller")
-onready var name_ : LineEdit      = $vbox/name
+onready var name_ : LineEdit      = $vbox/grid/name
+onready var test_ : OptionButton  = $vbox/grid/test
 onready var grid_ : GridContainer = $vbox/scroll/grid
 
 var number_edit_ := preload("NumberEdit.tscn")
@@ -21,6 +22,18 @@ func select_node(node):
 	
 	name_.editable = true
 	name_.text     = node.display_name
+
+	test_.clear()
+	test_.add_item("")
+	var s = 0
+	for value in node_.values:
+		test_.add_item(String(value))
+		
+		if node_.test_value == value:
+			s = test_.get_item_count() - 1
+
+	test_.select(s)
+
 	grid_.columns  = node_.inputs.size() + node_.values.size()
 	
 	for child in grid_.get_children():
@@ -56,3 +69,7 @@ func _on_name_text_changed(new_text : String):
 
 func _on_cpt_value_changed(new_value : float, r : int, v : int) -> void:
 	controller_.set_node_cpt_value(node_, r, v, new_value)
+
+func _on_test_item_selected(id : int):
+	var value = node_.values[test_.selected - 1] if test_.selected > 0 else null
+	controller_.set_node_test_value(node_, value)

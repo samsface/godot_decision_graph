@@ -24,7 +24,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="node" type="Label" parent="."]
+[node name="test" type="Label" parent="."]
 margin_left = 16.0
 margin_top = 24.0
 margin_right = 129.0

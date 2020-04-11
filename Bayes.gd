@@ -8,6 +8,7 @@ var cpt_table    := [{"inputs": [], "prob": values.duplicate()}]
 var inputs       := {}
 var outputs      := {}
 var position     := Vector2()
+var test_value    = null
 
 func cartesian_product_(pools : Array) -> Array:
 	var results = [[]]
