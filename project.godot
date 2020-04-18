@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "BayNode",
 "language": "GDScript",
 "path": "res://Bayes.gd"
+}, {
+"base": "Object",
+"class": "CarNode",
+"language": "GDScript",
+"path": "res://Cart.gd"
 } ]
 _global_script_class_icons={
-"BayNode": ""
+"BayNode": "",
+"CarNode": ""
 }
 
 [application]
@@ -26,8 +32,8 @@ config/icon="res://icon.png"
 
 [display]
 
-window/size/width=1804
-window/size/height=1120
+window/size/width=2500
+window/size/height=1200
 
 [rendering]
 

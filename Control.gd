@@ -1,9 +1,10 @@
 extends Control
 
-onready var controller_          := get_node("/root/controller")
-onready var name_ : LineEdit      = $vbox/grid/name
-onready var test_ : OptionButton  = $vbox/grid/test
-onready var grid_ : GridContainer = $vbox/scroll/grid
+onready var controller_            := get_node("/root/controller")
+onready var name_   : LineEdit      = $vbox/grid/name_edit
+onready var test_   : OptionButton  = $vbox/grid/test
+onready var values_ : LineEdit      = $vbox/grid/values
+onready var grid_   : GridContainer = $vbox/scroll/grid
 
 var number_edit_ := preload("NumberEdit.tscn")
 var node_ = null
@@ -15,45 +16,20 @@ func select_node(node):
 		name_.text     = ""
 		name_.editable = false
 		
-		for child in grid_.get_children():
-			grid_.remove_child(child)
-		
+
 		return
 	
 	name_.editable = true
 	name_.text     = node.display_name
-
-	test_.clear()
-	test_.add_item("")
-	var s = 0
-	for value in node_.values:
-		test_.add_item(String(value))
-		
-		if node_.test_value == value:
-			s = test_.get_item_count() - 1
-
-	test_.select(s)
-
-	grid_.columns  = node_.inputs.size() + node_.values.size()
 	
-	for child in grid_.get_children():
-		grid_.remove_child(child)
+	$vbox/condition_text.text = ""
+	for input in node.inputs:
+		if node in input.output_slots[0]:
+			$vbox/condition_text.text += input.display_name + "\n"
+		else:
+			$vbox/condition_text.text += "NOT " + input.display_name + "\n"
 	
-	for n in node_.inputs:
-		grid_.add_child(make_label_(n.display_name))
-		
-	for v in node_.values:
-		grid_.add_child(make_label_("P(" + String(v) + ")"))
-		
-	for r in range(node_.cpt_table.size()):
-		for value in node_.cpt_table[r].inputs:
-			grid_.add_child(make_label_(value))
-			
-		for v in range(node_.cpt_table[r].prob.size()):
-			var edit  = number_edit_.instance()
-			edit .text = String(node_.cpt_table[r].prob[v])
-			edit .connect("value_changed", self, "_on_cpt_value_changed", [r, v])
-			grid_.add_child(edit )
+	#values_.text = PoolStringArray(node_.values).join(",")
 
 func make_label_(value) -> Label:
 	var label  = LineEdit.new()
@@ -73,3 +49,9 @@ func _on_cpt_value_changed(new_value : float, r : int, v : int) -> void:
 func _on_test_item_selected(id : int):
 	var value = node_.values[test_.selected - 1] if test_.selected > 0 else null
 	controller_.set_node_test_value(node_, value)
+
+func _on_values_text_changed(new_values : String):
+	controller_.set_node_values(node_, new_values.split(","))
+
+func _on_test_edit_item_selected(id):
+	controller_.set_node_test_value(node_, id - 1)

@@ -1,27 +1,14 @@
 extends Object
-class_name BayNode
+class_name CarNode
 
 var id           := ""
 var display_name := ""
 var values       := [0, 1]
 var cpt_table    := [{"inputs": [], "prob": values.duplicate()}]
 var inputs       := {}
-var output_slots := [{}, {}]
+var outputs      := {}
 var position     := Vector2()
-var test_value   := -1
-var value        := -1
-
-func get_output_slot_idx(node : BayNode) -> int:
-	for i in range(0, output_slots.size()):
-		if node in output_slots[i]:
-			return i
-			
-	return -1
-	
-func is_connected_to(node : BayNode) -> bool:
-	if node == self: return true
-	if get_output_slot_idx(node) != -1: return true
-	return inputs.has(node)
+var test_value    = null
 
 func cartesian_product_(pools : Array) -> Array:
 	var results = [[]]
@@ -42,9 +29,6 @@ func update_cpt_table() -> void:
 	var cp := cartesian_product_(pools)
 	
 	var new_cpt_table := []
-	
-	#print(inputs)
-	#print(cp)
 	
 	for row in cp:
 		new_cpt_table.append({"inputs": row, "prob": values.duplicate()})

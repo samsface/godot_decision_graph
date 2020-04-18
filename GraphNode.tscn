@@ -7,11 +7,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -164.5
+margin_left = -164.0
 margin_top = -163.0
-margin_right = -19.5
-margin_bottom = -105.0
+margin_right = -19.0
+margin_bottom = -89.0
 mouse_filter = 1
+title = "hi"
 show_close = true
 slot/0/left_enabled = false
 slot/0/left_type = 0
@@ -19,14 +20,46 @@ slot/0/left_color = Color( 1, 1, 1, 1 )
 slot/0/right_enabled = false
 slot/0/right_type = 0
 slot/0/right_color = Color( 1, 1, 1, 1 )
+slot/1/left_enabled = false
+slot/1/left_type = 0
+slot/1/left_color = Color( 1, 1, 1, 1 )
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color( 1, 1, 1, 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="test" type="Label" parent="."]
-margin_left = 16.0
+[node name="test_1_button" type="Button" parent="."]
+modulate = Color( 1, 2, 1, 1 )
+margin_left = 117.0
 margin_top = 24.0
 margin_right = 129.0
-margin_bottom = 38.0
+margin_bottom = 44.0
+size_flags_horizontal = 8
+toggle_mode = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="test_0_button" type="Button" parent="."]
+modulate = Color( 2, 1, 1, 1 )
+margin_left = 117.0
+margin_top = 45.0
+margin_right = 129.0
+margin_bottom = 65.0
+size_flags_horizontal = 8
+toggle_mode = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="close_request" from="." to="." method="_on_close_request"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="test_1_button" to="." method="_on_test_1_button_mouse_entered"]
+[connection signal="mouse_exited" from="test_1_button" to="." method="_on_test_1_button_mouse_exited"]
+[connection signal="toggled" from="test_1_button" to="." method="_on_test_1_button_toggled"]
+[connection signal="mouse_entered" from="test_0_button" to="." method="_on_test_0_button_mouse_entered"]
+[connection signal="mouse_exited" from="test_0_button" to="." method="_on_test_0_button_mouse_exited"]
+[connection signal="toggled" from="test_0_button" to="." method="_on_test_0_button_toggled"]

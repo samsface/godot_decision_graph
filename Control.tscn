@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://controller.gd" type="Script" id=1]
 [ext_resource path="res://GraphEdit.gd" type="Script" id=2]
 [ext_resource path="res://Control.gd" type="Script" id=3]
+[ext_resource path="res://vbox.vs" type="Script" id=4]
 
 [node name="controller" type="Control"]
 anchor_right = 1.0
@@ -15,39 +16,69 @@ __meta__ = {
 [node name="vbox" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="save" type="Button" parent="vbox"]
-margin_right = 1804.0
+[node name="GridContainer" type="GridContainer" parent="vbox"]
+margin_right = 2500.0
+margin_bottom = 20.0
+columns = 4
+
+[node name="save" type="Button" parent="vbox/GridContainer"]
+margin_right = 41.0
 margin_bottom = 20.0
 text = "Save"
 
+[node name="test" type="Button" parent="vbox/GridContainer"]
+margin_left = 45.0
+margin_right = 84.0
+margin_bottom = 20.0
+text = "Test"
+
+[node name="clear_test_values" type="Button" parent="vbox/GridContainer"]
+margin_left = 88.0
+margin_right = 209.0
+margin_bottom = 20.0
+text = "Clear Test Values"
+
+[node name="opacity_slider" type="HSlider" parent="vbox/GridContainer"]
+margin_left = 213.0
+margin_right = 313.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 100, 0 )
+min_value = 0.1
+max_value = 1.0
+step = 0.1
+value = 0.2
+tick_count = 10
+ticks_on_borders = true
+
 [node name="splitter" type="HSplitContainer" parent="vbox"]
 margin_top = 24.0
-margin_right = 1804.0
-margin_bottom = 1074.0
-rect_min_size = Vector2( 0, 1050 )
-split_offset = 1200
+margin_right = 2500.0
+margin_bottom = 1199.0
+rect_min_size = Vector2( 0, 1175 )
+split_offset = 2200
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="graph_edit" type="GraphEdit" parent="vbox/splitter"]
-margin_right = 1200.0
-margin_bottom = 1050.0
+margin_right = 2200.0
+margin_bottom = 1175.0
 right_disconnects = true
-scroll_offset = Vector2( -400, 0 )
+scroll_offset = Vector2( -29, -20 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="properties" type="Panel" parent="vbox/splitter"]
-margin_left = 1212.0
-margin_right = 1804.0
-margin_bottom = 1050.0
+margin_left = 2212.0
+margin_right = 2500.0
+margin_bottom = 1175.0
 script = ExtResource( 3 )
 
 [node name="vbox" type="VBoxContainer" parent="vbox/splitter/properties"]
@@ -62,20 +93,20 @@ __meta__ = {
 }
 
 [node name="grid" type="GridContainer" parent="vbox/splitter/properties/vbox"]
-margin_right = 572.0
-margin_bottom = 72.0
+margin_right = 268.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 columns = 2
 
-[node name="Label" type="Label" parent="vbox/splitter/properties/vbox/grid"]
+[node name="name_label" type="Label" parent="vbox/splitter/properties/vbox/grid"]
 margin_top = 5.0
-margin_right = 43.0
+margin_right = 42.0
 margin_bottom = 19.0
 text = "Name:"
 
-[node name="name" type="LineEdit" parent="vbox/splitter/properties/vbox/grid"]
-margin_left = 47.0
-margin_right = 187.0
+[node name="name_edit" type="LineEdit" parent="vbox/splitter/properties/vbox/grid"]
+margin_left = 46.0
+margin_right = 186.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 140, 0 )
 align = 3
@@ -84,70 +115,52 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="vbox/splitter/properties/vbox/grid"]
+[node name="test_label" type="Label" parent="vbox/splitter/properties/vbox/grid"]
 margin_top = 31.0
-margin_right = 43.0
+margin_right = 42.0
 margin_bottom = 45.0
 text = "Test:"
 
-[node name="test" type="OptionButton" parent="vbox/splitter/properties/vbox/grid"]
-margin_left = 47.0
+[node name="test_edit" type="OptionButton" parent="vbox/splitter/properties/vbox/grid"]
+margin_left = 46.0
 margin_top = 28.0
-margin_right = 187.0
+margin_right = 186.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 140, 0 )
-text = "0"
-align = 2
-
-[node name="Label3" type="Label" parent="vbox/splitter/properties/vbox/grid"]
-margin_top = 55.0
-margin_right = 43.0
-margin_bottom = 69.0
-text = "Query:"
-
-[node name="test2" type="Button" parent="vbox/splitter/properties/vbox/grid"]
-margin_left = 47.0
-margin_top = 52.0
-margin_right = 187.0
-margin_bottom = 72.0
-rect_min_size = Vector2( 140, 0 )
-text = "ting"
-align = 2
+text = "infer"
+items = [ "infer", null, false, 0, null, "0", null, false, 1, null, "1", null, false, 2, null ]
+selected = 0
 
 [node name="HSeparator" type="HSeparator" parent="vbox/splitter/properties/vbox"]
-margin_top = 76.0
-margin_right = 572.0
-margin_bottom = 80.0
+margin_top = 54.0
+margin_right = 268.0
+margin_bottom = 58.0
 
-[node name="Label" type="Label" parent="vbox/splitter/properties/vbox"]
-margin_top = 84.0
-margin_right = 572.0
-margin_bottom = 98.0
-text = "CPT:"
+[node name="condition_label" type="Label" parent="vbox/splitter/properties/vbox"]
+margin_top = 62.0
+margin_right = 268.0
+margin_bottom = 76.0
+text = "Condition:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="scroll" type="ScrollContainer" parent="vbox/splitter/properties/vbox"]
-margin_top = 102.0
-margin_right = 572.0
-margin_bottom = 1002.0
-rect_min_size = Vector2( 0, 900 )
-scroll_horizontal_enabled = false
+[node name="condition_text" type="RichTextLabel" parent="vbox/splitter/properties/vbox"]
+margin_top = 80.0
+margin_right = 268.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 0, 100 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="grid" type="GridContainer" parent="vbox/splitter/properties/vbox/scroll"]
-columns = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
-[connection signal="button_up" from="vbox/save" to="." method="_on_save_button_up"]
+[connection signal="button_up" from="vbox/GridContainer/save" to="." method="_on_save_button_up"]
+[connection signal="button_up" from="vbox/GridContainer/test" to="." method="_on_test_button_up"]
+[connection signal="button_up" from="vbox/GridContainer/clear_test_values" to="." method="_on_clear_test_values_button_up"]
+[connection signal="value_changed" from="vbox/GridContainer/opacity_slider" to="." method="_on_opacity_slider_value_changed"]
 [connection signal="_end_node_move" from="vbox/splitter/graph_edit" to="vbox/splitter/graph_edit" method="_on_end_node_move"]
 [connection signal="connection_request" from="vbox/splitter/graph_edit" to="vbox/splitter/graph_edit" method="_on_connection_request"]
 [connection signal="disconnection_request" from="vbox/splitter/graph_edit" to="vbox/splitter/graph_edit" method="_on_disconnection_request"]
 [connection signal="gui_input" from="vbox/splitter/graph_edit" to="vbox/splitter/graph_edit" method="_on_gui_input"]
 [connection signal="node_selected" from="vbox/splitter/graph_edit" to="vbox/splitter/graph_edit" method="_on_node_selected"]
-[connection signal="text_changed" from="vbox/splitter/properties/vbox/grid/name" to="vbox/splitter/properties" method="_on_name_text_changed"]
-[connection signal="item_selected" from="vbox/splitter/properties/vbox/grid/test" to="vbox/splitter/properties" method="_on_test_item_selected"]
+[connection signal="text_changed" from="vbox/splitter/properties/vbox/grid/name_edit" to="vbox/splitter/properties" method="_on_name_text_changed"]
+[connection signal="item_selected" from="vbox/splitter/properties/vbox/grid/test_edit" to="vbox/splitter/properties" method="_on_test_edit_item_selected"]
