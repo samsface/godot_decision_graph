@@ -21,6 +21,12 @@ func invalidate() -> void:
 	var is_focused          = is_focused_ or temp_focus_
 	var value               = data.test_value if data.test_value != -1 else data.value
 
+	$test_1_button.visible = inputs_count == 1
+	$test_0_button.visible = inputs_count == 1
+	
+	#$test_1_button.pressed = data.test_value == 1
+	#$test_0_button.pressed = data.test_value == 0
+
 	for i in range(0, size):
 		if i >= invalid_child_count:
 			var label := Label.new()

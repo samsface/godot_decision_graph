@@ -2,13 +2,17 @@ extends GraphEdit
 
 onready var controller_ := get_node("/root/controller")
 
-var selected_   = null
-var node_gui_  := preload("GraphNode.tscn")
-var node_guis_ := {}
+var selected_     = null
+var node_gui_    := preload("GraphNode.tscn")
+var node_guis_   := {}
+var redraw_hack_ := true
 
 func invalidate() -> void:
 	for node_gui in node_guis_.values():
 		node_gui.invalidate()
+	
+	zoom += 0.000001 if redraw_hack_ else -0.000001
+	redraw_hack_ = not redraw_hack_
 
 func add_node(node : BayNode) -> void:
 	var node_gui := node_gui_.instance()
@@ -74,7 +78,6 @@ func _on_gui_input(event) -> void:
 	if event is InputEventMouseButton:
 		if event.doubleclick:
 			controller_.add_node(get_global_mouse_position() + scroll_offset)
-
 
 func _on_disconnection_request(from, from_slot, to, to_slot):
 	controller_.disconnect_nodes(get_node(from).data, get_node(to).data)

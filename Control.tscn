@@ -1,9 +1,38 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://controller.gd" type="Script" id=1]
 [ext_resource path="res://GraphEdit.gd" type="Script" id=2]
 [ext_resource path="res://Control.gd" type="Script" id=3]
-[ext_resource path="res://vbox.vs" type="Script" id=4]
+
+[sub_resource type="VisualScriptConstant" id=1]
+type = 3
+value = 0.0
+
+[sub_resource type="VisualScriptConstant" id=2]
+type = 3
+value = 0.0
+
+[sub_resource type="VisualScriptOperator" id=3]
+_default_input_values = [ 1.0, 1.0 ]
+operator = 2
+type = 3
+
+[sub_resource type="VisualScript" id=4]
+data = {
+"base_type": "VBoxContainer",
+"functions": [ {
+"data_connections": [ 0, 0, 2, 0, 1, 0, 2, 1 ],
+"function_id": -1,
+"name": "f_312843592",
+"nodes": [ 0, Vector2( 80, 260 ), SubResource( 1 ), 1, Vector2( 80, 340 ), SubResource( 2 ), 2, Vector2( 260, 280 ), SubResource( 3 ) ],
+"scroll": Vector2( -50, -100 ),
+"sequence_connections": [  ]
+} ],
+"is_tool_script": false,
+"signals": [  ],
+"variables": [  ],
+"vs_unify": true
+}
 
 [node name="controller" type="Control"]
 anchor_right = 1.0
@@ -16,49 +45,50 @@ __meta__ = {
 [node name="vbox" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 4 )
+script = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="GridContainer" type="GridContainer" parent="vbox"]
 margin_right = 2500.0
-margin_bottom = 20.0
-columns = 4
+margin_bottom = 24.0
+columns = 5
 
 [node name="save" type="Button" parent="vbox/GridContainer"]
 margin_right = 41.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 text = "Save"
 
 [node name="test" type="Button" parent="vbox/GridContainer"]
 margin_left = 45.0
 margin_right = 84.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 text = "Test"
 
-[node name="clear_test_values" type="Button" parent="vbox/GridContainer"]
+[node name="test2" type="Button" parent="vbox/GridContainer"]
 margin_left = 88.0
-margin_right = 209.0
-margin_bottom = 20.0
+margin_right = 134.0
+margin_bottom = 24.0
+text = "Make"
+
+[node name="clear_test_values" type="Button" parent="vbox/GridContainer"]
+margin_left = 138.0
+margin_right = 259.0
+margin_bottom = 24.0
 text = "Clear Test Values"
 
-[node name="opacity_slider" type="HSlider" parent="vbox/GridContainer"]
-margin_left = 213.0
-margin_right = 313.0
-margin_bottom = 16.0
+[node name="opacity_slider" type="CheckBox" parent="vbox/GridContainer"]
+margin_left = 263.0
+margin_right = 430.0
+margin_bottom = 24.0
 rect_min_size = Vector2( 100, 0 )
-min_value = 0.1
-max_value = 1.0
-step = 0.1
-value = 0.2
-tick_count = 10
-ticks_on_borders = true
+text = "Only Show Connected"
 
 [node name="splitter" type="HSplitContainer" parent="vbox"]
-margin_top = 24.0
+margin_top = 28.0
 margin_right = 2500.0
-margin_bottom = 1199.0
+margin_bottom = 1203.0
 rect_min_size = Vector2( 0, 1175 )
 split_offset = 2200
 __meta__ = {
@@ -155,8 +185,9 @@ __meta__ = {
 }
 [connection signal="button_up" from="vbox/GridContainer/save" to="." method="_on_save_button_up"]
 [connection signal="button_up" from="vbox/GridContainer/test" to="." method="_on_test_button_up"]
+[connection signal="button_up" from="vbox/GridContainer/test2" to="." method="_on_make"]
 [connection signal="button_up" from="vbox/GridContainer/clear_test_values" to="." method="_on_clear_test_values_button_up"]
-[connection signal="value_changed" from="vbox/GridContainer/opacity_slider" to="." method="_on_opacity_slider_value_changed"]
+[connection signal="toggled" from="vbox/GridContainer/opacity_slider" to="." method="_on_only_show_selected_toggled"]
 [connection signal="_end_node_move" from="vbox/splitter/graph_edit" to="vbox/splitter/graph_edit" method="_on_end_node_move"]
 [connection signal="connection_request" from="vbox/splitter/graph_edit" to="vbox/splitter/graph_edit" method="_on_connection_request"]
 [connection signal="disconnection_request" from="vbox/splitter/graph_edit" to="vbox/splitter/graph_edit" method="_on_disconnection_request"]

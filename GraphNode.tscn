@@ -33,24 +33,26 @@ __meta__ = {
 
 [node name="test_1_button" type="Button" parent="."]
 modulate = Color( 1, 2, 1, 1 )
-margin_left = 117.0
+margin_left = 110.0
 margin_top = 24.0
 margin_right = 129.0
 margin_bottom = 44.0
 size_flags_horizontal = 8
 toggle_mode = true
+text = "T"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="test_0_button" type="Button" parent="."]
 modulate = Color( 2, 1, 1, 1 )
-margin_left = 117.0
+margin_left = 110.0
 margin_top = 45.0
 margin_right = 129.0
 margin_bottom = 65.0
 size_flags_horizontal = 8
 toggle_mode = true
+text = "F"
 __meta__ = {
 "_edit_use_anchors_": false
 }
